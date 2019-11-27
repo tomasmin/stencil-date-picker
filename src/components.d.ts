@@ -11,6 +11,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {}
+  interface TmDatePicker {}
 }
 
 declare global {
@@ -21,16 +22,25 @@ declare global {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
+
+  interface HTMLTmDatePickerElement extends Components.TmDatePicker, HTMLStencilElement {}
+  var HTMLTmDatePickerElement: {
+    prototype: HTMLTmDatePickerElement;
+    new (): HTMLTmDatePickerElement;
+  };
   interface HTMLElementTagNameMap {
     'my-component': HTMLMyComponentElement;
+    'tm-date-picker': HTMLTmDatePickerElement;
   }
 }
 
 declare namespace LocalJSX {
   interface MyComponent {}
+  interface TmDatePicker {}
 
   interface IntrinsicElements {
     'my-component': MyComponent;
+    'tm-date-picker': TmDatePicker;
   }
 }
 
@@ -41,6 +51,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+      'tm-date-picker': LocalJSX.TmDatePicker & JSXBase.HTMLAttributes<HTMLTmDatePickerElement>;
     }
   }
 }
