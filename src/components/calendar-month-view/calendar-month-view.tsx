@@ -279,7 +279,9 @@ export class GxCalendarMonthView {
           ? true
           : false,
       isToday:
-        this.firstVisibleDate.dayOfYear() === moment(this.viewDate).dayOfYear()
+        this.firstVisibleDate.dayOfYear() ===
+          moment(this.viewDate).dayOfYear() &&
+        this.firstVisibleDate.month() === this.viewDate.month()
           ? true
           : false,
       isFuture:
@@ -408,7 +410,10 @@ export class GxCalendarMonthView {
             .unix() ===
             moment()
               .startOf("day")
-              .unix()
+              .unix() &&
+          moment(headerLast)
+            .add(x, "d")
+            .month() === moment(this.viewDate).month()
             ? true
             : false,
         isFuture:
@@ -484,9 +489,13 @@ export class GxCalendarMonthView {
         <div class="cal-month-view--container">
           <div>
             <div class="cal-prev-month">
-              <button id="calPrevMonthButton" onClick={() => this.prevMonth()}>
+              <button
+                id="calPrevMonthButton"
+                class="previous round"
+                onClick={() => this.prevMonth()}
+              >
                 {" "}
-                Previous Month{" "}
+                &#8249;{" "}
               </button>
             </div>
           </div>
@@ -494,7 +503,7 @@ export class GxCalendarMonthView {
             <div class="cal-next-month">
               <button id="calNextMonthButton" onClick={() => this.nextMonth()}>
                 {" "}
-                Next Month{" "}
+                &#8250;{" "}
               </button>
             </div>
           </div>

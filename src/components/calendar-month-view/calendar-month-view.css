@@ -138,14 +138,14 @@
 }
 
 /* .cal-month-view .cal-day-cell.cal-today { */
-.cal-month-view .cal-cell.cal-today {
+/* .cal-month-view .cal-cell.cal-today {
   background-color: #e8fde7;
-}
+} */
 
 /* .cal-month-view .cal-day-cell.cal-today .cal-day-number { */
-.cal-month-view .cal-cell.cal-today .cal-day-number {
+/* .cal-month-view .cal-cell.cal-today .cal-day-number {
   font-size: 1.9em;
-}
+} */
 
 .cal-month-view .cal-day-cell.cal-drag-over {
   background-color: #e0e0e0 !important;
