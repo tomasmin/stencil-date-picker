@@ -57,7 +57,6 @@ export namespace Components {
     */
     'weeksToShow': number;
   }
-  interface MyComponent {}
   interface TmDatePicker {}
 }
 
@@ -76,12 +75,6 @@ declare global {
     new (): HTMLGxCalendarMonthViewElement;
   };
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
-  };
-
   interface HTMLTmDatePickerElement extends Components.TmDatePicker, HTMLStencilElement {}
   var HTMLTmDatePickerElement: {
     prototype: HTMLTmDatePickerElement;
@@ -90,7 +83,6 @@ declare global {
   interface HTMLElementTagNameMap {
     'gx-calendar-cell': HTMLGxCalendarCellElement;
     'gx-calendar-month-view': HTMLGxCalendarMonthViewElement;
-    'my-component': HTMLMyComponentElement;
     'tm-date-picker': HTMLTmDatePickerElement;
   }
 }
@@ -164,7 +156,6 @@ declare namespace LocalJSX {
     */
     'weeksToShow'?: number;
   }
-  interface MyComponent {}
   interface TmDatePicker {
     'onMonthDayClicked'?: (event: CustomEvent<any>) => void;
   }
@@ -172,7 +163,6 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'gx-calendar-cell': GxCalendarCell;
     'gx-calendar-month-view': GxCalendarMonthView;
-    'my-component': MyComponent;
     'tm-date-picker': TmDatePicker;
   }
 }
@@ -185,7 +175,6 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'gx-calendar-cell': LocalJSX.GxCalendarCell & JSXBase.HTMLAttributes<HTMLGxCalendarCellElement>;
       'gx-calendar-month-view': LocalJSX.GxCalendarMonthView & JSXBase.HTMLAttributes<HTMLGxCalendarMonthViewElement>;
-      'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
       'tm-date-picker': LocalJSX.TmDatePicker & JSXBase.HTMLAttributes<HTMLTmDatePickerElement>;
     }
   }
