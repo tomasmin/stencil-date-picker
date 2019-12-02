@@ -7,15 +7,74 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  CalendarEvent,
+  MonthViewDay,
+} from './model/gx-calendar';
 
 export namespace Components {
+  interface GxCalendarCell {
+    'day': any;
+    'locale': string;
+    'onDayClick': (mouseEvent: MouseEvent, calendarEvent: CalendarEvent<any>) => Promise<void>;
+    'onEventClick': (mouseEvent: MouseEvent, calendarEvent: CalendarEvent<any>) => Promise<void>;
+    'openDay': MonthViewDay;
+    'tooltipPlacement': string;
+  }
+  interface GxCalendarMonthView {
+    /**
+    * Visibility of previous and next month buttons
+    */
+    'customHeader': boolean;
+    /**
+    * An array of events to display on view TBC
+    */
+    'events': CalendarEvent[];
+    /**
+    * The locale used to format dates
+    */
+    'locale': string;
+    'nextMonth': () => Promise<void>;
+    'prevMonth': () => Promise<void>;
+    'refreshBody': (date?: any) => Promise<void>;
+    'refreshEvents': () => Promise<void>;
+    'refreshHeader': () => Promise<void>;
+    /**
+    * V or H to toggle vertical or horizontal scroll for calendar months
+    */
+    'scrolldir': any;
+    'setUpGestures': () => Promise<void>;
+    'setViewDate': any;
+    'setupWeeksToShow': () => Promise<void>;
+    /**
+    * Visibility of previous and next month buttons
+    * @type {boolean}
+    * @memberof GxCalendarMonthView
+    */
+    'shownavbuttons': boolean;
+    /**
+    * 4, 6, 7 or 8 to control number of rows (weeks) shown per month.  Default is 5
+    */
+    'weeksToShow': number;
+  }
   interface MyComponent {}
   interface TmDatePicker {}
 }
 
 declare global {
 
+
+  interface HTMLGxCalendarCellElement extends Components.GxCalendarCell, HTMLStencilElement {}
+  var HTMLGxCalendarCellElement: {
+    prototype: HTMLGxCalendarCellElement;
+    new (): HTMLGxCalendarCellElement;
+  };
+
+  interface HTMLGxCalendarMonthViewElement extends Components.GxCalendarMonthView, HTMLStencilElement {}
+  var HTMLGxCalendarMonthViewElement: {
+    prototype: HTMLGxCalendarMonthViewElement;
+    new (): HTMLGxCalendarMonthViewElement;
+  };
 
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
@@ -29,16 +88,90 @@ declare global {
     new (): HTMLTmDatePickerElement;
   };
   interface HTMLElementTagNameMap {
+    'gx-calendar-cell': HTMLGxCalendarCellElement;
+    'gx-calendar-month-view': HTMLGxCalendarMonthViewElement;
     'my-component': HTMLMyComponentElement;
     'tm-date-picker': HTMLTmDatePickerElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface GxCalendarCell {
+    'day'?: any;
+    'locale'?: string;
+    'onDayClicked'?: (event: CustomEvent<any>) => void;
+    'onEventClicked'?: (event: CustomEvent<any>) => void;
+    'onHighlightDay'?: (event: CustomEvent<any>) => void;
+    'onShowTodaysEvents'?: (event: CustomEvent<any>) => void;
+    'onUnhighlightDay'?: (event: CustomEvent<any>) => void;
+    'openDay'?: MonthViewDay;
+    'tooltipPlacement'?: string;
+  }
+  interface GxCalendarMonthView {
+    /**
+    * Visibility of previous and next month buttons
+    */
+    'customHeader'?: boolean;
+    /**
+    * An array of events to display on view TBC
+    */
+    'events'?: CalendarEvent[];
+    /**
+    * The locale used to format dates
+    */
+    'locale'?: string;
+    /**
+    * Called when the day cell is pressed
+    */
+    'onDayPressed'?: (event: CustomEvent<any>) => void;
+    /**
+    * Called when the event title is clicked
+    */
+    'onEventClicked'?: (event: CustomEvent<any>) => void;
+    /**
+    * Called when an event is dragged and dropped
+    */
+    'onEventTimesChanged'?: (event: CustomEvent<any>) => void;
+    /**
+    * Called when month is moved forward in time
+    */
+    'onMonthChangeFuture'?: (event: CustomEvent<any>) => void;
+    /**
+    * Called when month is moved back in time
+    */
+    'onMonthChangePast'?: (event: CustomEvent<any>) => void;
+    /**
+    * Called when the month day cell is clicked
+    */
+    'onMonthDayClicked'?: (event: CustomEvent<any>) => void;
+    /**
+    * Displays current days' events
+    */
+    'onTodaysCalendarEvents'?: (event: CustomEvent<any>) => void;
+    /**
+    * V or H to toggle vertical or horizontal scroll for calendar months
+    */
+    'scrolldir'?: any;
+    'setViewDate'?: any;
+    /**
+    * Visibility of previous and next month buttons
+    * @type {boolean}
+    * @memberof GxCalendarMonthView
+    */
+    'shownavbuttons'?: boolean;
+    /**
+    * 4, 6, 7 or 8 to control number of rows (weeks) shown per month.  Default is 5
+    */
+    'weeksToShow'?: number;
+  }
   interface MyComponent {}
-  interface TmDatePicker {}
+  interface TmDatePicker {
+    'onMonthDayClicked'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
+    'gx-calendar-cell': GxCalendarCell;
+    'gx-calendar-month-view': GxCalendarMonthView;
     'my-component': MyComponent;
     'tm-date-picker': TmDatePicker;
   }
@@ -50,6 +183,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'gx-calendar-cell': LocalJSX.GxCalendarCell & JSXBase.HTMLAttributes<HTMLGxCalendarCellElement>;
+      'gx-calendar-month-view': LocalJSX.GxCalendarMonthView & JSXBase.HTMLAttributes<HTMLGxCalendarMonthViewElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
       'tm-date-picker': LocalJSX.TmDatePicker & JSXBase.HTMLAttributes<HTMLTmDatePickerElement>;
     }
