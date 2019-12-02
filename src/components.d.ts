@@ -57,7 +57,9 @@ export namespace Components {
     */
     'weeksToShow': number;
   }
-  interface TmDatePicker {}
+  interface TmDatePicker {
+    'format': string;
+  }
 }
 
 declare global {
@@ -157,6 +159,7 @@ declare namespace LocalJSX {
     'weeksToShow'?: number;
   }
   interface TmDatePicker {
+    'format'?: string;
     'onMonthDayClicked'?: (event: CustomEvent<any>) => void;
   }
 

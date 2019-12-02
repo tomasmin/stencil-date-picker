@@ -1,4 +1,4 @@
-import { Component, h, Listen, Event, EventEmitter } from "@stencil/core";
+import { Component, h, Listen, Event, EventEmitter, Prop } from "@stencil/core";
 
 @Component({
   tag: "tm-date-picker",
@@ -12,12 +12,10 @@ export class DatePicker {
   @Event()
   monthDayClicked: EventEmitter;
 
+  @Prop() format: string = "MM/DD/YYYY";
+
   showCalendar() {
     this.picker.style.visibility = "visible";
-  }
-  hideCalendar(day: string) {
-    this.picker.style.visibility = "hidden";
-    this.input.value = "mm/" + day + "/yyyy";
   }
 
   @Listen("dayClicked")
@@ -25,7 +23,7 @@ export class DatePicker {
     console.log(day.detail.event);
 
     this.picker.style.visibility = "hidden";
-    this.input.value = day.detail.event.date.format("MM/DD/YYYY");
+    this.input.value = day.detail.event.date.format(this.format);
 
     this.monthDayClicked.emit(day.detail);
   }
