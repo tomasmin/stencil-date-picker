@@ -488,22 +488,18 @@ export class GxCalendarMonthView {
       <div class="cal-month-view">
         <div class="cal-month-view--container">
           <div>
-            <div class="cal-prev-month">
-              <button
-                id="calPrevMonthButton"
-                class="previous round"
+            <div>
+              <button class="monthNavButton"
                 onClick={() => this.prevMonth()}
               >
-                {" "}
-                &#8249;{" "}
+                &#8249;
               </button>
             </div>
           </div>
           <div>
-            <div class="cal-next-month">
-              <button id="calNextMonthButton" onClick={() => this.nextMonth()}>
-                {" "}
-                &#8250;{" "}
+            <div>
+              <button class="monthNavButton" onClick={() => this.nextMonth()}>
+                &#8250;
               </button>
             </div>
           </div>

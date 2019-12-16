@@ -27,10 +27,11 @@
 }
 
 .cal-month-view .cal-cell-top {
-  min-height: 78px;
+  min-height: 50px;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  cursor: pointer;
 }
 
 .cal-month-view .cal-cell-row {
@@ -187,3 +188,8 @@
 .cal-header {
   align-content: center;
 } */
+
+.monthNavButton {
+  cursor: pointer;
+  padding:0.35em 1.2em;
+}
